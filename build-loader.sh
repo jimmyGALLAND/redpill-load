@@ -219,8 +219,11 @@ if [ ! -f "${BRP_ZLINUX_FILE}" ]; then
           pr_info "No zimage in Unpacked PAT - Try to find flashupdate package" "${BRP_PAT_FILE}"
           readonly BRP_FLASHUPDATE_DEBFILE=$( ls -d ${BRP_UPAT_DIR}/flashupdate_*.deb | head -n1 )
           if [ -f "${BRP_FLASHUPDATE_DEBFILE}" ]; then
-                  pr_process "flashupdate found unpack"
-                  "${DPKG_PATH}" -x "${BRP_FLASHUPDATE_DEBFILE}" "${BRP_UPAT_DIR}"
+                  pr_process "flashupdate found -- run unpack"
+		  cd "${BRP_UPAT_DIR}"
+		  ${AR_PATH} x $(basename "${BRP_FLASHUPDATE_DEBFILE}") "data.tar.xz"
+		  cd "${OLDPWD}"
+		  brp_unpack_tar "${BRP_UPAT_DIR}/data.tar.xz" "${BRP_UPAT_DIR}"
           fi
   fi
 
