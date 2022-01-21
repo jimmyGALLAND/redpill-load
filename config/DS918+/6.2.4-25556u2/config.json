@@ -1,0 +1,127 @@
+{
+  "os": {
+    "id": "ds918p_25556u2",
+    "pat_url": "",
+    "sha256": "5e53a40eca7bd0c0d229561e3ef6bac51fb005a9a71eba88d02974cdfb7534a7"
+  },
+
+  "files": {
+    "zlinux": {
+      "name": "zImage",
+      "sha256": "ceee6a4e69427e9706f57128f99b3a0022bd458283638d29492161f3a079ba76"
+    },
+    "ramdisk": {
+      "name": "rd.gz",
+      "sha256": "20d1cacb818cd55ea7f63b3c4e19444cdf1aeb9f1246c61005d128a109363b0b"
+    },
+    "vmlinux": {
+      "sha256": "7984a21aad784c158e42320fd6074ee83ca21619958b51a6ff497e80767605f0"
+    }
+  },
+
+  "patches": {
+    "zlinux": [
+      "zImage-001-918p-25556u2-ramdisk-and-flag-NOP.bsp"
+    ],
+    "ramdisk": [
+      "@@@COMMON@@@/ramdisk-001-disable-root-pwd.patch",
+      "@@@COMMON@@@/ramdisk-002-init-script-OLD-name.patch",
+      "@@@COMMON@@@/ramdisk-003-post-init-script-LOWER.patch"
+    ]
+  },
+
+  "synoinfo": {
+    "maxdisks": "16",
+    "internalportcfg": "0xffff",
+    "esataportcfg": "0x0",
+    "HddHotplug": "",
+    "support_led_brightness_adjustment": "",
+    "support_leds_lp3943": "",
+    "buzzeroffen": "0xffff",
+    "rss_server": "http://example.com/null.xml",
+    "rss_server_ssl": "https://example.com/null.xml",
+    "small_info_path": "https://example.com/null",
+    "updateurl": "http://example.com/",
+    "myds_region_api_base_url": "https://example.com"
+  },
+
+  "grub": {
+    "template": "@@@COMMON@@@/grub-template.conf",
+    "base_cmdline": {
+      "sn": "",
+      "vid": "0x46f4",
+      "pid": "0x0001",
+      "mac1": "",
+      "netif_num": 1,
+
+      "syno_hw_version": "DS918+",
+      "syno_hdd_powerup_seq": 1,
+      "HddHotplug": 0,
+      "vender_format_version": 2,
+      "console": "ttyS0,115200n8",
+      "withefi": null,
+      "elevator": "elevator",
+      "syno_port_thaw": 1,
+      "syno_hdd_detect": 0,
+      "root": "/dev/md0",
+      "earlycon": "uart8250,io,0x3f8,115200n8"
+    },
+
+    "menu_entries": {
+      "RedPill DS918+ v6.2.4-25556 u2/u3 (USB, Verbose)": {
+        "options": [
+          "savedefault",
+          "set root=(hd0,msdos1)",
+          "echo Loading Linux...",
+          "linux /zImage @@@CMDLINE@@@",
+          "echo Loading initramfs...",
+          "initrd /rd.gz /custom.gz",
+          "echo Starting kernel with USB boot"
+        ],
+        "cmdline": {
+          "earlyprintk": null,
+          "loglevel": 15,
+          "log_buf_len": "32M"
+        }
+      },
+      "RedPill DS918+ v6.2.4-25556 u2/u3 (SATA, Verbose)": {
+        "options": [
+          "savedefault",
+          "set root=(hd0,msdos1)",
+          "echo Loading Linux...",
+          "linux /zImage @@@CMDLINE@@@",
+          "echo Loading initramfs...",
+          "initrd /rd.gz /custom.gz",
+          "echo Starting kernel with SATA boot",
+          "echo WARNING: SATA boot support on this platform is experimental!"
+        ],
+        "cmdline": {
+          "earlyprintk": null,
+          "loglevel": 15,
+          "synoboot_satadom": 2,
+          "log_buf_len": "32M"
+        }
+      }
+    }
+  },
+
+  "extra": {
+    "compress_rd": false,
+    "ramdisk_copy": {
+      "@@@EXT@@@/rp-lkm/redpill-linux-v4.4.59+.ko": "usr/lib/modules/rp.ko",
+      "@@@COMMON@@@/iosched-trampoline.sh": "usr/sbin/modprobe"
+    },
+    "bootp1_copy": {
+      "@@@PAT@@@/GRUB_VER": "GRUB_VER",
+      "@@@COMMON@@@/EFI": "EFI"
+    },
+    "bootp2_copy": {
+      "@@@PAT@@@/GRUB_VER": "GRUB_VER",
+      "@@@COMMON@@@/EFI": "EFI",
+      "@@@PAT@@@/grub_cksum.syno": "grub_cksum.syno",
+      "@@@PAT@@@/rd.gz": "rd.gz",
+      "@@@PAT@@@/zImage": "zImage"
+    }
+  }
+}
+
