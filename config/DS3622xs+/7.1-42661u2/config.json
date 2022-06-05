@@ -1,0 +1,130 @@
+{
+    "os": {
+        "id": "ds3622xsp_42661u2",
+        "pat_url": "https://global.download.synology.com/download/DSM/criticalupdate/update_pack/42661-2/synology_broadwellnk_3622xs%2B.pat",
+        "sha256_": "fa930ed982cc887e37fec8dba35e81531500ebc51d69d0eaf12fa34de3693228",
+	"sha256": "bc176de4684209b780e9f592672e9339f380b5c9da7e2aa7026333736bc4492f"
+	
+    },
+
+    "files": {
+        "zlinux": {
+            "name": "zImage",
+            "sha256": "a0a536f86570707747edf5428cf3fce4c08bb6e9dadf6f63dc9aec72f4d47c3b"
+        },
+        "ramdisk": {
+            "name": "rd.gz",
+            "sha256": "70cc6e849585d6ef9b0dcb697a0a295d75dfcd44ae3dca19e97084169376e4b7"
+        },
+        "vmlinux": {
+            "sha256": "3a5ed6cc5a15a2b39fe7abbfdf4fbdba0641719e224137e308ee17312ed7528a"
+        }
+    },
+
+    "patches": {
+        "_comment": ".bsp patches are applied to FILES using bspatch(1); .patch are applied to DIRECTORIES using patch(1)",
+        "zlinux": [
+            "zImage-001-3622xs+-42661u2-ramdisk-and-header.bsp"
+        ],
+        "ramdisk": [
+            "@@@COMMON@@@/ramdisk-001-disable-root-pwd.patch",
+            "@@@COMMON@@@/ramdisk-002-init-script-NEW-name.patch",
+            "@@@COMMON@@@/ramdisk-003-post-init-script-UPPER.patch",
+            "@@@COMMON@@@/ramdisk-004-v7-network-hosts.patch"
+	]
+    },
+    "synoinfo": {
+	    "maxdisks": "24",
+	    "support_bde_internal_10g": "no",
+	    "support_disk_compatibility": "no",
+	    "internalportcfg": "0xfffff",
+	    "SasIdxMap": "0",
+	    "esataportcfg": "0x00",
+	    "rss_server": "http://example.com/null.xml",
+	    "rss_server_ssl": "https://example.com/null.xml",
+	    "small_info_path": "https://example.com/null",
+	    "rss_server_v2": "https://example.com/autoupdate/v2/getList",
+	    "security_version_server": "https://example.com/smallupdate",
+	    "updateurl": "http://example.com/",
+	    "update_server": "http://example.com/",
+	    "update_server_ssl": "https//example.com/",
+	    "myds_region_api_base_url": "https://example.com"
+    },
+    "grub": {
+	    "template": "@@@COMMON@@@/grub-template.conf",
+	    "base_cmdline": {
+		    "sn": "",
+		    "vid": "0x46f4",
+		    "pid": "0x0001",
+		    "SataPortMap": "1", 
+		    "DiskIdxMap": "0",
+		    "mac1": "",
+		    "netif_num": 5,
+		    "syno_hw_version": "DS3622xs+",
+		    "syno_hdd_powerup_seq": 0,
+		    "HddHotplug": 0,
+		    "vender_format_version": 2,
+		    "console": "ttyS0,115200n8",
+		    "withefi": null,
+		    "elevator": "elevator",
+		    "syno_port_thaw": 1,
+		    "syno_hdd_detect": 0,
+		    "root": "/dev/md0",
+		    "earlycon": "uart8250,io,0x3f8,115200n8"
+	    },
+	    "menu_entries": {
+		    "RedPill DS3622xs v7.1.0-42661 Update 2(USB, Verbose)": {
+			    "options": [
+				    "savedefault",
+				    "set root=(hd0,msdos1)",
+				    "echo Loading Linux...",
+				    "linux /zImage @@@CMDLINE@@@",
+				    "echo Loading initramfs...",
+				    "initrd /rd.gz /custom.gz",
+				    "echo Starting kernel with USB boot"
+			    ],
+			    "cmdline": {
+				    "earlyprintk": null,
+				    "loglevel": 15,
+				    "log_buf_len": "32M"
+			    }
+		    },
+		    "RedPill DS3622xs v7.1.0-42661 Update 2 (SATA, Verbose)": {
+			    "options": [
+				    "savedefault",
+				    "set root=(hd0,msdos1)",
+				    "echo Loading Linux...",
+				    "linux /zImage @@@CMDLINE@@@",
+				    "echo Loading initramfs...",
+				    "initrd /rd.gz /custom.gz",
+				    "echo Starting kernel with SATA boot"
+			    ],
+			    "cmdline": {
+				    "earlyprintk": null,
+				    "loglevel": 15,
+				    "synoboot_satadom": 1,
+				    "log_buf_len": "32M"
+			    }
+		    }
+	    }
+    },
+    "extra": {
+	    "compress_rd": false,
+	    "ramdisk_copy": {
+		    "@@@EXT@@@/rp-lkm/redpill-linux-v4.4.180+.ko": "usr/lib/modules/rp.ko",
+		    "@@@COMMON@@@/iosched-trampoline.sh": "usr/sbin/modprobe"
+	    },
+	    "bootp1_copy": {
+		    "@@@PAT@@@/GRUB_VER": "GRUB_VER",
+		    "@@@COMMON@@@/EFI/boot/SynoBootLoader.conf": "EFI/BOOT/",
+		    "@@@COMMON@@@/EFI/boot/SynoBootLoader.efi": "EFI/BOOT/"
+	    },
+	    "bootp2_copy": {
+		    "@@@PAT@@@/GRUB_VER": "GRUB_VER",
+		    "@@@COMMON@@@/EFI": "EFI",
+		    "@@@PAT@@@/grub_cksum.syno": "grub_cksum.syno",
+		    "@@@PAT@@@/rd.gz": "rd.gz",
+		    "@@@PAT@@@/zImage": "zImage"
+	    }
+    }
+}
