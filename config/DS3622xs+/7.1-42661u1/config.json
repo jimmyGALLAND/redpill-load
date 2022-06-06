@@ -1,28 +1,28 @@
 {
     "os": {
-        "id": "ds3622xsp_42661u2",
-        "pat_url": "https://global.download.synology.com/download/DSM/criticalupdate/update_pack/42661-2/synology_broadwellnk_3622xs%2B.pat",
-        "sha256": "fa930ed982cc887e37fec8dba35e81531500ebc51d69d0eaf12fa34de3693228"
+        "id": "ds3622xsp_42661u1",
+        "pat_url": "https://global.download.synology.com/download/DSM/release/7.1/42661-1/DSM_DS3622xs%2B_42661.pat",
+        "sha256": "53d0a4f1667288b6e890c4fdc48422557ff26ea8a2caede0955c5f45b560cccd"
     },
 
     "files": {
         "zlinux": {
             "name": "zImage",
-            "sha256": "a0a536f86570707747edf5428cf3fce4c08bb6e9dadf6f63dc9aec72f4d47c3b"
+            "sha256": "e073dd84054f652811e0ae1932af2c7cdbd5fb6e5f18f265097072b8af4605e8"
         },
         "ramdisk": {
             "name": "rd.gz",
-            "sha256": "70cc6e849585d6ef9b0dcb697a0a295d75dfcd44ae3dca19e97084169376e4b7"
+            "sha256": "df8a055d6bc901229f0ba53ed5b4fe024bdf9a1b42f0c32483adefcdac14db4d"
         },
         "vmlinux": {
-            "sha256": "3a5ed6cc5a15a2b39fe7abbfdf4fbdba0641719e224137e308ee17312ed7528a"
+            "sha256": "40915d6222ebbf67eca20256df4b4e13b2f1b982de200e5e9e5474541de0baa0"
         }
     },
 
     "patches": {
         "_comment": ".bsp patches are applied to FILES using bspatch(1); .patch are applied to DIRECTORIES using patch(1)",
         "zlinux": [
-            "zImage-001-3622xs+-42661u2-ramdisk-and-header.bsp"
+            "zImage-001-3622xs+-42661-ramdisk-and-header.bsp"
         ],
         "ramdisk": [
             "@@@COMMON@@@/ramdisk-001-disable-root-pwd.patch",

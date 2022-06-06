@@ -1,28 +1,28 @@
 {
     "os": {
-        "id": "ds3617xs_42550",
-        "pat_url": "https://global.download.synology.com/download/DSM/beta/7.1/42550/DSM_DS3617xs_42550.pat?model=DS3617xs&bays=12&dsm_version=7.1&build_number=42550",
-        "sha256": "d3245ebc3a24b3020885f7e246c7726a365adfd21497856a699d80df1f84b748"
+        "id": "ds3617xs_42661u2",
+        "pat_url": "https://global.download.synology.com/download/DSM/criticalupdate/update_pack/42661-2/synology_broadwell_3617xs.pat",
+	"sha256": "1b58da6150b6a299a8df994461a3e9b802175d7e6da3c4d9e06a3d7a9ea7f8ee"
     },
 
     "files": {
         "zlinux": {
             "name": "zImage",
-            "sha256": "aa59b92eb65bf10005b39906d467767a64600d624ad56093637e17e51da128c7"
+            "sha256": "59b58f1222ede1741e4e3860238f8cb90d09476dcf3ed29b86c0c943addb084d"
         },
         "ramdisk": {
             "name": "rd.gz",
-            "sha256": "84d927fe7871d0efc66d562a265c17642c26b9b9e5bcc069ec4f723eaef2b558"
+            "sha256": "683d7388e199d799fd124c65cd74bb3b8b1d1f797d5cda9dbe4cf12d884a907b"
         },
         "vmlinux": {
-            "sha256": "4278ebd542536dce220bbe077266a9ee6ed7517cf6238c0151b8118bf506320d"
+            "sha256": "bc82f9f0f3af32c2490bccfa020e798fa7be80f3577e5eacf173229e1abbdbc9"
         }
     },
 
     "patches": {
         "_comment": ".bsp patches are applied to FILES using bspatch(1); .patch are applied to DIRECTORIES using patch(1)",
         "zlinux": [
-            "zImage-001-3617xs-42550-ramdisk-and-header.bsp"
+            "zImage-001-3617xs-42661u2-ramdisk-and-header.bsp"
         ],
         "ramdisk": [
             "@@@COMMON@@@/ramdisk-001-disable-root-pwd.patch",
@@ -68,7 +68,7 @@
             "earlycon": "uart8250,io,0x3f8,115200n8"
         },
         "menu_entries": {
-            "RedPill DS3617xs v7.1-42550 Beta(USB, Verbose)": {
+            "RedPill DS3617xs v7.1-42661 update 2(USB, Verbose)": {
                 "options": [
                     "savedefault",
                     "set root=(hd0,msdos1)",
@@ -84,7 +84,7 @@
                     "log_buf_len": "32M"
                 }
             },
-            "RedPill DS3617xs v7.1-42550 Beta (SATA, Verbose)": {
+            "RedPill DS3617xs v7.1-42661 update 2(SATA, Verbose)": {
                 "options": [
                     "savedefault",
                     "set root=(hd0,msdos1)",
